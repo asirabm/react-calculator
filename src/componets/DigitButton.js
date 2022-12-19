@@ -1,5 +1,5 @@
 import React from 'react'
-import { ACTION } from './App'
+import { ACTION } from '../App'
 
 function DigitButton({digit,dispatch}) {
   return (
