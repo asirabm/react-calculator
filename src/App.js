@@ -9,10 +9,11 @@ export const ACTION={
 const reducer=(state,{type,payload})=>{
   switch(type){
     case ACTION.ADD_DIGIT:
-      if(state.cOp === '0' && payload.digit === '0'){
+      if( payload.digit === '0' &&  state.cOp === '0'){
       return state
       }
-      if(state.cOp.includes('.') && payload.digit === '.'){
+      console.log(state.cOp)
+      if(  payload.digit === '.' && state.cOp.includes('.')){
         return state
       }
       return {...state,cOp:`${state.cOp || '' }${payload.digit}`}
@@ -25,7 +26,7 @@ const reducer=(state,{type,payload})=>{
 }
 
 function App() {
- const[{cOp,pOp,operation},dispatch]= useReducer(reducer,{})
+ const [{cOp,pOp,operation},dispatch]= useReducer(reducer,{})
   return (
     <div className='calculator-grid'>
        <div className='output-display'>
@@ -36,17 +37,17 @@ function App() {
        <button className='span-two'>AC</button>
        <button>DEL</button>
        <button>÷</button>
-       <button onClick={()=>{dispatch({type:ACTION.ADD_DIGIT,payload:{digit:'1'}})}}>1</button>
-       <DigitButton digit="2" dispatch={dispatch}/>
-       <button>3</button>
+       <DigitButton dispatch={dispatch} digit='1'/>
+       <DigitButton dispatch={dispatch} digit='2'/>
+       <DigitButton dispatch={dispatch} digit='3'/>
        <button>*</button>
-       <button>4</button>
-       <button>5</button>
-       <button>6</button>
+       <DigitButton dispatch={dispatch} digit='4'/>
+       <DigitButton dispatch={dispatch} digit='5'/>
+       <DigitButton dispatch={dispatch} digit='6'/>
        <button>+</button>
-       <button>7</button>
-       <button>8</button>
-       <button>9</button>
+       <DigitButton dispatch={dispatch} digit='7'/>
+       <DigitButton dispatch={dispatch} digit='8'/>
+       <DigitButton dispatch={dispatch} digit='9'/>
        <button>-</button>
        <button>.</button>
        <button>0</button>
