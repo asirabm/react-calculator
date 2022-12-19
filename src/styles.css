@@ -1,0 +1,56 @@
+*,*::after,*::after{
+    box-sizing: border-box;
+}
+:root{
+    font-family: 'Gotham Rounded';
+    font-size: 20px ;
+    color: var(--color-text-light);
+    --color-base-hue:200;
+    --color-background-dark: hsl(var(--color-base-hue),100%,8%);
+    --color-background-light: hsl(var(--color-base-hue),100%,16%);
+}
+
+body{
+    margin-top: 2rem;
+    background: linear-gradient(to right,var(--color-background-dark),var(--color-background-light));
+}
+.calculator-grid{
+ display: grid;
+ margin-top: 2rem;
+ grid-template-columns: repeat(4,6rem);
+ grid-template-rows:minmax(7rem, auto) repeat(5, 4rem);
+ justify-content: center;
+ 
+}
+.span-two{
+    grid-column: span 2;
+}
+.output-display{
+    grid-column: 1/-1;
+    background-color: rgba(0, 0, 0, .75);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.p-value{
+    color: rgba(255,255,255,.75);
+    font-size: 1.5rem;
+}
+.c-value{
+    color: rgba(255,255,255);
+    font-size: 2.5rem;
+}
+.calculator-grid > button{
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid white;
+    outline: none;
+    background-color: rgba(255, 255, 255, .75);
+}
+.calculator-grid > button:hover,
+.calculator-grid > button:focus{
+    background-color: rgba(255, 255, 255, .9);
+}
