@@ -53,28 +53,31 @@ const reducer=(state,{type,payload})=>{
         return state
    }
 }
+
 const eveluate=({cOp,pOp,operation})=>{
+
   const prev=parseFloat(pOp)
   const current=parseFloat(cOp)
+
   if(isNaN(prev)||isNaN(current)) return ''
+
   let results=''
   switch (operation) {
     case '+':
-      results=cOp+pOp
+      results=prev+current
       break;
       case '-':
-        results=pOp-cOp
+        results=prev-current
         break;
         case '×':
-          results=cOp*pOp
+          results=current*prev
           break;  
           case '÷':
-            results=pOp/cOp
+            results=prev/current
             break;
-  
-   return results.toString()
 
   }
+  return results.toString()
 
 
 
