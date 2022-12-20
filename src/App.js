@@ -7,18 +7,23 @@ import './styles.css'
 export const ACTION={
    ADD_DIGIT:'adding-digit',
    ADD_OPER:'adding-operation',
-   CLEAR:'clear'
+   CLEAR:'clear',
+   EVELUATE:'eveluate'
 }
 
 const initialState={
   cOp:'',
   pOp:'',
-  operation:''
+  operation:'',
+  overwrite:false
 }
 
 const reducer=(state,{type,payload})=>{
   switch(type){
     case ACTION.ADD_DIGIT:
+      if(state.overwrite){
+        return {...state,cOp:payload.digit,overwrite:false}
+      }
       if( payload.digit === '0' &&  state.cOp === '0'){
       return state
       }
@@ -36,10 +41,18 @@ const reducer=(state,{type,payload})=>{
 
         if(state.pOp===''){
           return {
+            ...state,
             pOp:state.cOp,
             operation:payload.op,
             cOp:''
           }
+        }
+        if(state.cOp===''){
+          return{
+            ...state,
+            operation:payload.op
+          }
+
         }
         return {
           ...state,
@@ -49,9 +62,25 @@ const reducer=(state,{type,payload})=>{
         }
     case ACTION.CLEAR:
       return {cOp:'',pOp:'',operation:''}
+     
+    case ACTION.EVELUATE:
+      console.log('From eveluate')
+      if(state.cOp === ''|| state.pOp=== '' || state.operation ==''){
+        return state
+      }
+      return {
+        ...state,
+        
+        operation:'',
+        pOp:'',
+        cOp:eveluate(state),
+        overwrite:true
+      }
     default:
         return state
    }
+  
+
 }
 
 const eveluate=({cOp,pOp,operation})=>{
@@ -109,7 +138,7 @@ function App() {
        <OpButton dispatch={dispatch} op='-'/>
        <DigitButton dispatch={dispatch} digit='.'/>
        <DigitButton dispatch={dispatch} digit='0'/>
-       <button className='span-two'>=</button>
+       <button onClick={()=>dispatch({type:ACTION.EVELUATE})} className='span-two'>=</button>
     
        
     </div>
